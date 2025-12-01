@@ -14,7 +14,7 @@ const chequeData = {
   chequeNumber: "CH2024001234",
   accountHolderName: "Rajesh Kumar Sharma",
   mobileNumber: "+91 XXXXXX7890",
-  amount: "₹50,000.00",
+  amount: "৳50,000.00",
   issueDate: "November 28, 2024",
   chequeFrontImage: chequeFront,
   chequeBackImage: chequeBack,
