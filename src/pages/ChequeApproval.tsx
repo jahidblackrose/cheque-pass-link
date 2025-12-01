@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { OTPInput } from "@/components/OTPInput";
 import { ImageModal } from "@/components/ImageModal";
-import { CheckCircle2, XCircle, Shield, Eye, Loader2 } from "lucide-react";
+import { SessionTimer } from "@/components/SessionTimer";
+import { CheckCircle2, XCircle, Shield, Eye, Loader2, Clock } from "lucide-react";
 import { toast } from "sonner";
 import bankLogo from "@/assets/mtb-logo.png";
 import chequeFront from "@/assets/cheque-front.png";
@@ -20,7 +21,7 @@ const chequeData = {
   chequeBackImage: chequeBack,
 };
 
-type ViewState = "initial" | "rejected" | "otp" | "success";
+type ViewState = "initial" | "rejected" | "otp" | "success" | "expired";
 
 const ChequeApproval = () => {
   const [viewState, setViewState] = useState<ViewState>("initial");
@@ -28,6 +29,11 @@ const ChequeApproval = () => {
   const [selectedImage, setSelectedImage] = useState<{ url: string; title: string } | null>(null);
   const [otpError, setOtpError] = useState("");
   const [resendTimer, setResendTimer] = useState(0);
+
+  const handleSessionExpire = () => {
+    setViewState("expired");
+    toast.error("Session expired. Please request a new approval link.");
+  };
 
   const handleReject = () => {
     const confirmed = window.confirm(
@@ -111,6 +117,34 @@ const ChequeApproval = () => {
     setSelectedImage({ url, title });
   };
 
+  if (viewState === "expired") {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-destructive/5 via-background to-destructive/5 flex items-center justify-center p-4">
+        <Card className="max-w-md w-full p-8 text-center space-y-6 shadow-lg">
+          <div className="flex justify-center">
+            <div className="rounded-full bg-destructive/10 p-4">
+              <Clock className="h-16 w-16 text-destructive" />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <h1 className="text-2xl font-bold text-foreground">Session Expired</h1>
+            <p className="text-muted-foreground">
+              Your approval session has expired for security reasons.
+            </p>
+          </div>
+          <div className="pt-4 border-t border-border">
+            <p className="text-sm text-muted-foreground mb-4">
+              Please request a new approval link via SMS or contact MTB customer service.
+            </p>
+            <Button variant="default" onClick={() => window.location.reload()}>
+              Request New Link
+            </Button>
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
   if (viewState === "success") {
     return (
       <div className="min-h-screen bg-gradient-to-br from-success/5 via-background to-success/5 flex items-center justify-center p-4">
@@ -163,62 +197,65 @@ const ChequeApproval = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5 py-8 px-4">
-      <div className="max-w-2xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-center gap-4 pb-4">
-          <img src={bankLogo} alt="MTB Logo" className="h-16 w-auto object-contain" />
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5 py-4 sm:py-8 px-3 sm:px-4">
+      <div className="max-w-2xl mx-auto space-y-4 sm:space-y-6">
+        {/* Header with Timer */}
+        <div className="flex flex-col items-center gap-3 sm:gap-4 pb-3 sm:pb-4">
+          <img src={bankLogo} alt="MTB Logo" className="h-12 sm:h-16 w-auto object-contain" />
+          {(viewState === "initial" || viewState === "otp") && (
+            <SessionTimer durationMinutes={30} onExpire={handleSessionExpire} />
+          )}
         </div>
         
-        <Card className="p-6 shadow-lg">
-          <div className="mb-6 pb-4 border-b border-border text-center">
-            <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+        <Card className="p-4 sm:p-6 shadow-lg">
+          <div className="mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-border text-center">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-2">
               MTB Online Cheque <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">Approval System</span>
             </h1>
-            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-              <Shield className="h-4 w-4 text-primary" />
+            <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-muted-foreground">
+              <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
               <span>Secure & Verified</span>
             </div>
           </div>
 
           {viewState === "initial" && (
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {/* Cheque Details */}
-              <div className="space-y-4">
-                <div className="bg-primary/5 rounded-lg p-4 border border-primary/10">
-                  <div className="text-sm text-muted-foreground mb-1">Cheque Leaf Number</div>
-                  <div className="text-2xl font-bold text-primary">{chequeData.chequeNumber}</div>
+              <div className="space-y-3 sm:space-y-4">
+                <div className="bg-primary/5 rounded-lg p-3 sm:p-4 border border-primary/10">
+                  <div className="text-xs sm:text-sm text-muted-foreground mb-1">Cheque Leaf Number</div>
+                  <div className="text-xl sm:text-2xl font-bold text-primary">{chequeData.chequeNumber}</div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   <div>
-                    <div className="text-sm text-muted-foreground mb-1">Account Holder</div>
-                    <div className="text-lg font-semibold text-foreground">{chequeData.accountHolderName}</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground mb-1">Account Holder</div>
+                    <div className="text-base sm:text-lg font-semibold text-foreground">{chequeData.accountHolderName}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-muted-foreground mb-1">Registered Mobile</div>
-                    <div className="text-lg font-semibold text-foreground">{chequeData.mobileNumber}</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground mb-1">Registered Mobile</div>
+                    <div className="text-base sm:text-lg font-semibold text-foreground">{chequeData.mobileNumber}</div>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   <div>
-                    <div className="text-sm text-muted-foreground mb-1">Cheque Amount</div>
-                    <div className="text-xl font-bold text-success">{chequeData.amount}</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground mb-1">Cheque Amount</div>
+                    <div className="text-xl sm:text-2xl font-bold text-success">{chequeData.amount}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-muted-foreground mb-1">Issue Date</div>
-                    <div className="text-lg font-semibold text-foreground">{chequeData.issueDate}</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground mb-1">Issue Date</div>
+                    <div className="text-base sm:text-lg font-semibold text-foreground">{chequeData.issueDate}</div>
                   </div>
                 </div>
               </div>
 
               {/* Cheque Images */}
-              <div className="space-y-4 pt-4 border-t border-border">
-                <h3 className="font-semibold text-foreground">Cheque Images</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-3 sm:space-y-4 pt-3 sm:pt-4 border-t border-border">
+                <h3 className="font-semibold text-sm sm:text-base text-foreground">Cheque Images</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   <div className="space-y-2">
-                    <div className="text-sm text-muted-foreground">Front Side</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">Front Side</div>
                     <div
                       className="relative rounded-lg overflow-hidden border-2 border-border hover:border-primary transition-colors cursor-pointer group"
                       onClick={() => openImageModal(chequeData.chequeFrontImage, "Cheque Front Side")}
@@ -234,7 +271,7 @@ const ChequeApproval = () => {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <div className="text-sm text-muted-foreground">Back Side</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">Back Side</div>
                     <div
                       className="relative rounded-lg overflow-hidden border-2 border-border hover:border-primary transition-colors cursor-pointer group"
                       onClick={() => openImageModal(chequeData.chequeBackImage, "Cheque Back Side")}
@@ -253,7 +290,7 @@ const ChequeApproval = () => {
               </div>
 
               {/* Action Buttons */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-4 sm:pt-6">
                 <Button
                   variant="success"
                   size="lg"
@@ -297,15 +334,15 @@ const ChequeApproval = () => {
           )}
 
           {viewState === "otp" && (
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               <div className="text-center space-y-2">
                 <div className="flex justify-center">
-                  <div className="rounded-full bg-accent/10 p-3">
-                    <Shield className="h-8 w-8 text-accent" />
+                  <div className="rounded-full bg-accent/10 p-2 sm:p-3">
+                    <Shield className="h-6 w-6 sm:h-8 sm:w-8 text-accent" />
                   </div>
                 </div>
-                <h2 className="text-xl font-bold text-foreground">Verify OTP</h2>
-                <p className="text-sm text-muted-foreground">
+                <h2 className="text-lg sm:text-xl font-bold text-foreground">Verify OTP</h2>
+                <p className="text-xs sm:text-sm text-muted-foreground px-2">
                   For security, an OTP has been sent to your registered mobile ending with{" "}
                   <span className="font-semibold text-foreground">
                     {chequeData.mobileNumber.slice(-4)}
@@ -315,7 +352,9 @@ const ChequeApproval = () => {
               </div>
 
               <div className="space-y-4">
-                <OTPInput onComplete={handleOTPComplete} disabled={isLoading} />
+                <div className="scale-90 sm:scale-100">
+                  <OTPInput onComplete={handleOTPComplete} disabled={isLoading} />
+                </div>
                 
                 {otpError && (
                   <div className="text-center text-sm text-destructive font-medium">
@@ -357,7 +396,7 @@ const ChequeApproval = () => {
         </Card>
 
       {/* Security Notice */}
-      <div className="text-center text-xs text-muted-foreground">
+      <div className="text-center text-xs text-muted-foreground px-4">
         <p>🔒 Mutual Trust Bank PLC secure portal. All transactions are encrypted.</p>
         <p className="mt-1">You can bank on us</p>
       </div>
