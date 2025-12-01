@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Shield, CheckCircle2, Smartphone, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
-import bankLogo from "@/assets/bank-logo.png";
+import bankLogo from "@/assets/mtb-logo.png";
 
 const Index = () => {
   return (
@@ -11,11 +11,7 @@ const Index = () => {
       <header className="border-b border-border bg-background/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src={bankLogo} alt="Bank Logo" className="h-10 w-auto object-contain" />
-            <div>
-              <h1 className="text-xl font-bold text-foreground">SecureBank</h1>
-              <p className="text-xs text-muted-foreground">Trusted Banking Solutions</p>
-            </div>
+            <img src={bankLogo} alt="MTB Logo" className="h-14 w-auto object-contain" />
           </div>
           <Link to="/approve">
             <Button variant="default" size="sm">
@@ -34,8 +30,8 @@ const Index = () => {
           </div>
           
           <h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight">
-            Secure Cheque Approval
-            <span className="block text-primary mt-2">Right From Your Phone</span>
+            MTB Online Cheque
+            <span className="block bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent mt-2">Approval System</span>
           </h1>
           
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -122,7 +118,8 @@ const Index = () => {
       {/* Footer */}
       <footer className="border-t border-border bg-background py-8">
         <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-          <p>© 2024 SecureBank. All rights reserved. A secure cheque approval system.</p>
+          <p>© 2024 Mutual Trust Bank PLC. All rights reserved.</p>
+          <p className="mt-1 text-xs">You can bank on us</p>
         </div>
       </footer>
     </div>

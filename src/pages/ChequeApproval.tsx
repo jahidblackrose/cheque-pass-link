@@ -5,7 +5,7 @@ import { OTPInput } from "@/components/OTPInput";
 import { ImageModal } from "@/components/ImageModal";
 import { CheckCircle2, XCircle, Shield, Eye, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import bankLogo from "@/assets/bank-logo.png";
+import bankLogo from "@/assets/mtb-logo.png";
 import chequeFront from "@/assets/cheque-front.png";
 import chequeBack from "@/assets/cheque-back.png";
 
@@ -167,13 +167,18 @@ const ChequeApproval = () => {
       <div className="max-w-2xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center justify-center gap-4 pb-4">
-          <img src={bankLogo} alt="Bank Logo" className="h-12 w-auto object-contain" />
+          <img src={bankLogo} alt="MTB Logo" className="h-16 w-auto object-contain" />
         </div>
         
         <Card className="p-6 shadow-lg">
-          <div className="flex items-center gap-2 mb-6 pb-4 border-b border-border">
-            <Shield className="h-6 w-6 text-primary" />
-            <h1 className="text-2xl font-bold text-foreground">Secure Cheque Approval</h1>
+          <div className="mb-6 pb-4 border-b border-border text-center">
+            <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+              MTB Online Cheque <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">Approval System</span>
+            </h1>
+            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+              <Shield className="h-4 w-4 text-primary" />
+              <span>Secure & Verified</span>
+            </div>
           </div>
 
           {viewState === "initial" && (
@@ -351,10 +356,11 @@ const ChequeApproval = () => {
           )}
         </Card>
 
-        {/* Security Notice */}
-        <div className="text-center text-xs text-muted-foreground">
-          <p>🔒 This is a secure banking portal. All transactions are encrypted.</p>
-        </div>
+      {/* Security Notice */}
+      <div className="text-center text-xs text-muted-foreground">
+        <p>🔒 Mutual Trust Bank PLC secure portal. All transactions are encrypted.</p>
+        <p className="mt-1">You can bank on us</p>
+      </div>
       </div>
 
       {selectedImage && (
