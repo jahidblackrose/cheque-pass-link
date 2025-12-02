@@ -14,8 +14,9 @@ import chequeBack from "@/assets/cheque-back.png";
 const chequeData = {
   chequeNumber: "CH2024001234",
   accountHolderName: "Rajesh Kumar Sharma",
-  mobileNumber: "+91 XXXXXX7890",
+  mobileNumber: "+8801913XXXX53",
   amount: "৳50,000.00",
+  amountInWords: "Fifty Thousand Taka Only",
   issueDate: "November 28, 2024",
   chequeFrontImage: chequeFront,
   chequeBackImage: chequeBack,
@@ -197,67 +198,69 @@ const ChequeApproval = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5 py-4 sm:py-8 px-3 sm:px-4">
-      <div className="max-w-2xl mx-auto space-y-4 sm:space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5 py-6 sm:py-10 px-4 sm:px-6">
+      <div className="max-w-3xl mx-auto space-y-6 sm:space-y-8">
         {/* Header with Timer */}
-        <div className="flex flex-col items-center gap-3 sm:gap-4 pb-3 sm:pb-4">
-          <img src={bankLogo} alt="MTB Logo" className="h-12 sm:h-16 w-auto object-contain" />
+        <div className="flex flex-col items-center gap-4 sm:gap-5">
+          <div className="bg-white dark:bg-card rounded-2xl p-4 shadow-lg">
+            <img src={bankLogo} alt="MTB Logo" className="h-14 sm:h-20 w-auto object-contain" />
+          </div>
           {(viewState === "initial" || viewState === "otp") && (
             <SessionTimer durationMinutes={30} onExpire={handleSessionExpire} />
           )}
         </div>
         
-        <Card className="p-4 sm:p-6 shadow-lg">
-          <div className="mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-border text-center">
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-2">
+        <Card className="p-6 sm:p-8 shadow-2xl border-2 border-primary/10 bg-white/80 dark:bg-card/80 backdrop-blur-sm">
+          <div className="mb-6 sm:mb-8 pb-5 sm:pb-6 border-b-2 border-primary/10 text-center">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 leading-tight">
               MTB Online Cheque <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">Approval System</span>
             </h1>
-            <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-muted-foreground">
-              <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
+            <div className="flex items-center justify-center gap-2 text-sm sm:text-base text-muted-foreground font-medium">
+              <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
               <span>Secure & Verified</span>
             </div>
           </div>
 
           {viewState === "initial" && (
-            <div className="space-y-4 sm:space-y-6">
+            <div className="space-y-5 sm:space-y-7">
               {/* Cheque Details */}
-              <div className="space-y-3 sm:space-y-4">
-                <div className="bg-primary/5 rounded-lg p-3 sm:p-4 border border-primary/10">
-                  <div className="text-xs sm:text-sm text-muted-foreground mb-1">Cheque Leaf Number</div>
-                  <div className="text-xl sm:text-2xl font-bold text-primary">{chequeData.chequeNumber}</div>
+              <div className="space-y-4 sm:space-y-5">
+                <div className="bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl p-4 sm:p-5 border-2 border-primary/20 shadow-md">
+                  <div className="text-xs sm:text-sm text-muted-foreground mb-2 font-medium uppercase tracking-wide">Cheque Leaf Number</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-primary">{chequeData.chequeNumber}</div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                  <div>
-                    <div className="text-xs sm:text-sm text-muted-foreground mb-1">Account Holder</div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                  <div className="bg-muted/30 rounded-xl p-4 border border-border/50">
+                    <div className="text-xs sm:text-sm text-muted-foreground mb-2 font-medium uppercase tracking-wide">Account Holder</div>
                     <div className="text-base sm:text-lg font-semibold text-foreground">{chequeData.accountHolderName}</div>
                   </div>
-                  <div>
-                    <div className="text-xs sm:text-sm text-muted-foreground mb-1">Registered Mobile</div>
-                    <div className="text-base sm:text-lg font-semibold text-foreground">{chequeData.mobileNumber}</div>
+                  <div className="bg-muted/30 rounded-xl p-4 border border-border/50">
+                    <div className="text-xs sm:text-sm text-muted-foreground mb-2 font-medium uppercase tracking-wide">Registered Mobile</div>
+                    <div className="text-base sm:text-lg font-semibold text-foreground font-mono">{chequeData.mobileNumber}</div>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                  <div>
-                    <div className="text-xs sm:text-sm text-muted-foreground mb-1">Cheque Amount</div>
-                    <div className="text-xl sm:text-2xl font-bold text-success">{chequeData.amount}</div>
-                  </div>
-                  <div>
-                    <div className="text-xs sm:text-sm text-muted-foreground mb-1">Issue Date</div>
-                    <div className="text-base sm:text-lg font-semibold text-foreground">{chequeData.issueDate}</div>
-                  </div>
+                <div className="bg-gradient-to-br from-success/10 to-success/5 rounded-xl p-5 sm:p-6 border-2 border-success/30 shadow-md">
+                  <div className="text-xs sm:text-sm text-muted-foreground mb-2 font-medium uppercase tracking-wide">Cheque Amount</div>
+                  <div className="text-3xl sm:text-4xl font-bold text-success mb-2">{chequeData.amount}</div>
+                  <div className="text-sm sm:text-base text-foreground/70 italic font-medium">({chequeData.amountInWords})</div>
+                </div>
+
+                <div className="bg-muted/30 rounded-xl p-4 border border-border/50">
+                  <div className="text-xs sm:text-sm text-muted-foreground mb-2 font-medium uppercase tracking-wide">Issue Date</div>
+                  <div className="text-base sm:text-lg font-semibold text-foreground">{chequeData.issueDate}</div>
                 </div>
               </div>
 
               {/* Cheque Images */}
-              <div className="space-y-3 sm:space-y-4 pt-3 sm:pt-4 border-t border-border">
-                <h3 className="font-semibold text-sm sm:text-base text-foreground">Cheque Images</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                  <div className="space-y-2">
-                    <div className="text-xs sm:text-sm text-muted-foreground">Front Side</div>
+              <div className="space-y-4 sm:space-y-5 pt-5 sm:pt-6 border-t-2 border-primary/10">
+                <h3 className="font-bold text-base sm:text-lg text-foreground uppercase tracking-wide">Cheque Images</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                  <div className="space-y-3">
+                    <div className="text-xs sm:text-sm text-muted-foreground font-medium uppercase tracking-wide">Front Side</div>
                     <div
-                      className="relative rounded-lg overflow-hidden border-2 border-border hover:border-primary transition-colors cursor-pointer group"
+                      className="relative rounded-xl overflow-hidden border-2 border-border hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group"
                       onClick={() => openImageModal(chequeData.chequeFrontImage, "Cheque Front Side")}
                     >
                       <img
@@ -265,15 +268,15 @@ const ChequeApproval = () => {
                         alt="Cheque Front"
                         className="w-full h-auto object-cover"
                       />
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <Eye className="h-8 w-8 text-white" />
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <Eye className="h-10 w-10 text-white drop-shadow-lg" />
                       </div>
                     </div>
                   </div>
-                  <div className="space-y-2">
-                    <div className="text-xs sm:text-sm text-muted-foreground">Back Side</div>
+                  <div className="space-y-3">
+                    <div className="text-xs sm:text-sm text-muted-foreground font-medium uppercase tracking-wide">Back Side</div>
                     <div
-                      className="relative rounded-lg overflow-hidden border-2 border-border hover:border-primary transition-colors cursor-pointer group"
+                      className="relative rounded-xl overflow-hidden border-2 border-border hover:border-primary hover:shadow-xl transition-all duration-300 cursor-pointer group"
                       onClick={() => openImageModal(chequeData.chequeBackImage, "Cheque Back Side")}
                     >
                       <img
@@ -281,8 +284,8 @@ const ChequeApproval = () => {
                         alt="Cheque Back"
                         className="w-full h-auto object-cover"
                       />
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <Eye className="h-8 w-8 text-white" />
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <Eye className="h-10 w-10 text-white drop-shadow-lg" />
                       </div>
                     </div>
                   </div>
@@ -290,22 +293,22 @@ const ChequeApproval = () => {
               </div>
 
               {/* Action Buttons */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-4 sm:pt-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 pt-6 sm:pt-8">
                 <Button
                   variant="success"
                   size="lg"
                   onClick={handleApprove}
                   disabled={isLoading}
-                  className="w-full font-semibold"
+                  className="w-full font-bold text-base sm:text-lg py-6 sm:py-7 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
                 >
                   {isLoading ? (
                     <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                       Processing...
                     </>
                   ) : (
                     <>
-                      <CheckCircle2 className="mr-2 h-5 w-5" />
+                      <CheckCircle2 className="mr-2 h-6 w-6" />
                       Approve Cheque
                     </>
                   )}
@@ -315,16 +318,16 @@ const ChequeApproval = () => {
                   size="lg"
                   onClick={handleReject}
                   disabled={isLoading}
-                  className="w-full font-semibold"
+                  className="w-full font-bold text-base sm:text-lg py-6 sm:py-7 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
                 >
                   {isLoading ? (
                     <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                       Processing...
                     </>
                   ) : (
                     <>
-                      <XCircle className="mr-2 h-5 w-5" />
+                      <XCircle className="mr-2 h-6 w-6" />
                       Reject
                     </>
                   )}
@@ -396,9 +399,12 @@ const ChequeApproval = () => {
         </Card>
 
       {/* Security Notice */}
-      <div className="text-center text-xs text-muted-foreground px-4">
-        <p>🔒 Mutual Trust Bank PLC secure portal. All transactions are encrypted.</p>
-        <p className="mt-1">You can bank on us</p>
+      <div className="text-center text-sm text-muted-foreground px-4 space-y-2">
+        <p className="flex items-center justify-center gap-2 font-medium">
+          <Shield className="h-4 w-4 text-primary" />
+          Mutual Trust Bank PLC secure portal. All transactions are encrypted.
+        </p>
+        <p className="text-foreground/60 font-semibold italic">You can bank on us</p>
       </div>
       </div>
 
