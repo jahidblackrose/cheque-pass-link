@@ -53,7 +53,7 @@ export const SessionTimer = ({ durationMinutes = 30, onExpire }: SessionTimerPro
         <Clock className="h-4 w-4" />
       )}
       <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
-        <span className="text-xs sm:text-sm font-medium whitespace-nowrap">
+        <span className="text-xs sm:text-sm font-medium whitespace-nowrap text-destructive">
           {isCritical ? "Expires in:" : "Time remaining:"}
         </span>
         <span className="text-lg sm:text-xl font-bold tabular-nums">{formattedTime}</span>
