@@ -20,6 +20,14 @@ const chequeData = {
   issueDate: "November 28, 2024",
   chequeFrontImage: chequeFront,
   chequeBackImage: chequeBack,
+  // Owner Info
+  ownerName: "Rajesh Kumar Sharma",
+  ownerAccountNumber: "1234567890123",
+  ownerMobile: "+8801913456753",
+  // Beneficiary Info
+  beneficiaryBankName: "Dutch-Bangla Bank Limited",
+  beneficiaryBranchName: "Gulshan Branch",
+  beneficiaryPayeeName: "Mohammad Karim",
 };
 
 type ViewState = "initial" | "rejected" | "otp" | "success" | "expired";
@@ -250,6 +258,53 @@ const ChequeApproval = () => {
                 <div className="bg-muted/30 rounded-xl p-4 border border-border/50">
                   <div className="text-xs sm:text-sm text-muted-foreground mb-2 font-medium uppercase tracking-wide">Issue Date</div>
                   <div className="text-base sm:text-lg font-semibold text-foreground">{chequeData.issueDate}</div>
+                </div>
+
+                {/* Owner & Beneficiary Info */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                  {/* Owner Info */}
+                  <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-4 sm:p-5 border border-primary/20">
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-2 h-2 rounded-full bg-primary"></div>
+                      <h4 className="font-bold text-sm sm:text-base text-foreground uppercase tracking-wide">Owner Info</h4>
+                    </div>
+                    <div className="space-y-3">
+                      <div>
+                        <div className="text-xs text-muted-foreground font-medium uppercase tracking-wide">Name</div>
+                        <div className="text-sm sm:text-base font-semibold text-foreground">{chequeData.ownerName}</div>
+                      </div>
+                      <div>
+                        <div className="text-xs text-muted-foreground font-medium uppercase tracking-wide">A/C Number</div>
+                        <div className="text-sm sm:text-base font-semibold text-foreground font-mono">{chequeData.ownerAccountNumber}</div>
+                      </div>
+                      <div>
+                        <div className="text-xs text-muted-foreground font-medium uppercase tracking-wide">Mobile</div>
+                        <div className="text-sm sm:text-base font-semibold text-foreground font-mono">{chequeData.ownerMobile}</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Beneficiary Info */}
+                  <div className="bg-gradient-to-br from-accent/5 to-accent/10 rounded-xl p-4 sm:p-5 border border-accent/20">
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-2 h-2 rounded-full bg-accent"></div>
+                      <h4 className="font-bold text-sm sm:text-base text-foreground uppercase tracking-wide">Beneficiary Info</h4>
+                    </div>
+                    <div className="space-y-3">
+                      <div>
+                        <div className="text-xs text-muted-foreground font-medium uppercase tracking-wide">Bank Name</div>
+                        <div className="text-sm sm:text-base font-semibold text-foreground">{chequeData.beneficiaryBankName}</div>
+                      </div>
+                      <div>
+                        <div className="text-xs text-muted-foreground font-medium uppercase tracking-wide">Branch Name</div>
+                        <div className="text-sm sm:text-base font-semibold text-foreground">{chequeData.beneficiaryBranchName}</div>
+                      </div>
+                      <div>
+                        <div className="text-xs text-muted-foreground font-medium uppercase tracking-wide">Payee Name</div>
+                        <div className="text-sm sm:text-base font-semibold text-foreground">{chequeData.beneficiaryPayeeName}</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
