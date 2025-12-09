@@ -18,6 +18,7 @@ const chequeData = {
   amount: "৳50,000.00",
   amountInWords: "Fifty Thousand Taka Only",
   issueDate: "November 28, 2024",
+  placeDate: "December 05, 2024",
   chequeFrontImage: chequeFront,
   chequeBackImage: chequeBack,
   // Owner Info
@@ -255,9 +256,15 @@ const ChequeApproval = () => {
                   <div className="text-sm sm:text-base text-foreground/70 italic font-medium">({chequeData.amountInWords})</div>
                 </div>
 
-                <div className="bg-muted/30 rounded-xl p-4 border border-border/50">
-                  <div className="text-xs sm:text-sm text-muted-foreground mb-2 font-medium uppercase tracking-wide">Issue Date</div>
-                  <div className="text-base sm:text-lg font-semibold text-foreground">{chequeData.issueDate}</div>
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                  <div className="bg-muted/30 rounded-xl p-4 border border-border/50">
+                    <div className="text-xs sm:text-sm text-muted-foreground mb-2 font-medium uppercase tracking-wide">Issue Date</div>
+                    <div className="text-base sm:text-lg font-semibold text-foreground">{chequeData.issueDate}</div>
+                  </div>
+                  <div className="bg-muted/30 rounded-xl p-4 border border-border/50">
+                    <div className="text-xs sm:text-sm text-muted-foreground mb-2 font-medium uppercase tracking-wide">Place Date</div>
+                    <div className="text-base sm:text-lg font-semibold text-foreground">{chequeData.placeDate}</div>
+                  </div>
                 </div>
 
                 {/* Owner & Beneficiary Info */}
