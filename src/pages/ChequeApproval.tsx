@@ -131,6 +131,13 @@ const ChequeApproval = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-destructive/5 via-background to-destructive/5 flex items-center justify-center p-4">
         <Card className="max-w-md w-full p-8 text-center space-y-6 shadow-lg">
+          <div className="flex justify-center mb-2">
+            <img 
+            src={bankLogo} 
+              alt="MTB Bank" 
+              className="h-12 sm:h-14 w-auto object-contain"
+            />
+          </div>
           <div className="flex justify-center">
             <div className="rounded-full bg-destructive/10 p-4">
               <Clock className="h-16 w-16 text-destructive" />
@@ -159,6 +166,13 @@ const ChequeApproval = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-success/5 via-background to-success/5 flex items-center justify-center p-4">
         <Card className="max-w-md w-full p-8 text-center space-y-6 shadow-lg">
+          <div className="flex justify-center mb-2">
+            <img 
+            src={bankLogo} 
+              alt="MTB Bank" 
+              className="h-12 sm:h-14 w-auto object-contain"
+            />
+          </div>
           <div className="flex justify-center">
             <div className="rounded-full bg-success/10 p-4">
               <CheckCircle2 className="h-16 w-16 text-success" />
@@ -185,6 +199,13 @@ const ChequeApproval = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-destructive/5 via-background to-destructive/5 flex items-center justify-center p-4">
         <Card className="max-w-md w-full p-8 text-center space-y-6 shadow-lg">
+          <div className="flex justify-center mb-2">
+            <img 
+              src={bankLogo} 
+              alt="MTB Bank" 
+              className="h-12 sm:h-14 w-auto object-contain"
+            />
+          </div>
           <div className="flex justify-center">
             <div className="rounded-full bg-destructive/10 p-4">
               <XCircle className="h-16 w-16 text-destructive" />
